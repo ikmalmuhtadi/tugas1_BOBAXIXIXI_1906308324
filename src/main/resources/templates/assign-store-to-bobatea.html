@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>BOBAXIXIXI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body style="background-color:#2B71FF;">
+<nav th:replace="fragments/fragment :: navbar('Boba Tea')"></nav>
+
+<div class="container-sm rounded" style="margin-top: 40px; background-color:white; padding-top:30px;padding-bottom:75px" >
+    <h2 th:text=" 'Add ' +  ${namaVarian} + ' to store' "></h2>
+
+    <form th:action="@{/boba/{idBobatea}/assign-store(idBobatea=${idBobatea})}" th:object="${storebobatea}" method="POST">
+        <table class="table table-hover" >
+            <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>Store Code</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Operational Hour</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="store, iterationStatus : ${listStore}">
+                <td>
+                    <input class="form-check-input" type="checkbox" name="listIdToko"  th:value="${store.idToko}" id="flexCheckDefault">
+                </td>
+                <td th:text="${store.noTeleponToko}"></td>
+                <td th:text="${store.namaToko}"></td>
+                <td th:text="${store.alamatToko}"></td>
+                <td th:text="${store.waktuBuka} + ' - ' + ${store.waktuTutup}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" type="submit">Confirm</button>
+        <a class="btn btn-primary" th:href="@{/boba}">Cancel</a>
+    </form>
+</div>
+
+
+</body>
+
+</html>

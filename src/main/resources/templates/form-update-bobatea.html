@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>BOBAXIXIXI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color:#2B71FF;">
+<nav th:replace="fragments/fragment :: navbar('Boba Tea')"></nav>
+<div class="container rounded" style="margin-top: 40px; background-color:white; padding-top:30px;padding-bottom:75px">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="font-weight-bold; text-center">Update Boba Tea</h2>
+                <br>
+                <form th:action="@{/boba/update/} + ${bobatea.idBobatea}" th:object="${bobatea}" method="POST">
+                    <input type="hidden" th:field="*{idBobatea}" />
+                    <div class="form-group ">
+                        Boba Tea Name: <br>
+                        <input required class="form-control" type="text" name="namaVarian" th:value="*{namaVarian}"/>
+                        <br><br>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Price : <br>
+                            <input required class="form-control" type="text" name="hargaBobatea" th:value="*{hargaBobatea}"/>
+                            <br><br>
+                        </div>
+                        <div class="form-group col-md-6">
+                            Size : <br>
+                            <select name="ukuranBobatea">
+                                <option value="0">Small</option>
+                                <option value="1">Medium</option>
+                                <option value="2">Large</option>
+                            </select>
+                            <br><br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Sugar Level <br>
+                            <select name="sugarlevelBobatea">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                            <br><br>
+                        </div>
+                        <div class="form-group col-md-6">
+                            Ice Level : <br>
+                            <select name="icelevelBobatea">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                            <br><br>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Topping : <br>
+                            <select th:field = "*{Topping}" class="form-control">
+                                <option value="">Topping</option>
+                                <option th:each ="topping: ${listTopping}"
+                                        th:value = "${topping.idTopping}"
+                                        th:text = "${topping.namaTopping}">
+                                </option>
+                            </select>
+                            <br><br>
+                        </div>
+                    </div>
+
+                    <br>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                    <a class="btn btn-primary" th:href="@{/boba}">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

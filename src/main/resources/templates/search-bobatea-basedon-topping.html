@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>BOBAXIXIXI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color:#2B71FF;">
+<nav th:replace="fragments/fragment :: navbar('Search')"></nav>
+<div class="container rounded" style="margin-top: 40px; background-color:white; padding-top:30px;padding-bottom:75px">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="font-weight-bold; text-center">Find Available Boba Variant by Topping</h2>
+                <br>
+                <form th:action="@{'/search?bobaName=' + ${namaVarian} + '&topping=' + ${namaTopping}}" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            Boba Name : <br>
+                            <select class="form-control" name="bobaName">
+                                <option>Boba Name</option>
+                                <option th:each ="bobatea: ${listBobateaname}"
+                                        th:value = "${bobatea.namaVarian}"
+                                        th:text = "${bobatea.namaVarian}">
+                                </option>
+                            </select>
+                            <br><br>
+                        </div>
+                        <div class="form-group col-md-4">
+                            Topping Name: <br>
+                            <select  class="form-control" name="topping">
+                                <option value="">Topping</option>
+                                <option th:each ="topping: ${listTopping}"
+                                        th:value = "${topping.namaTopping}"
+                                        th:text = "${topping.namaTopping}">
+                                </option>
+                            </select>
+                            <br><br>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <br>
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover" >
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>No</th>
+                            <th>Price</th>
+                            <th>Size</th>
+                            <th>Ice</th>
+                            <th>Sugar</th>
+                            <th>Store Name</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bobatea, iterationStatus : ${listHasilBoba}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="'Rp. ' + ${bobatea.hargaBobatea}"></td>
+                            <td th:if="${bobatea.ukuranBobatea} == 0">Small</td>
+                            <td th:if="${bobatea.ukuranBobatea} == 1">Medium</td>
+                            <td th:if="${bobatea.ukuranBobatea} == 2">Large</td>
+                            <td th:if="${bobatea.icelevelBobatea} == 0">Less</td>
+                            <td th:if="${bobatea.icelevelBobatea} == 1">Normal</td>
+                            <td th:if="${bobatea.icelevelBobatea} == 2">Extra</td>
+                            <td th:if="${bobatea.sugarlevelBobatea} == 0">Less</td>
+                            <td th:if="${bobatea.sugarlevelBobatea} == 1">Normal</td>
+                            <td th:if="${bobatea.sugarlevelBobatea} == 2">Extra</td>
+                            <td th:text="${listHasilStore[iterationStatus.index]}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

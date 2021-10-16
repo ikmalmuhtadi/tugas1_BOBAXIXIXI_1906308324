@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>BOBAXIXIXI</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+            crossorigin="anonymous"
+    ></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body style="background-color:#2B71FF;">
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
+
+    <div class="d-flex justify-content-center">
+        <div class="m-4 justify-content-center">
+            <h1 style="padding: 50px; border: 10px #df4759; background-color:#df4759; color:white;
+             border-radius: 15px;margin-top: 75px; margin-bottom: 25px;">WELCOME TO BOBAXIXIXI</h1>
+            <br>
+            <div class="d-flex justify-content-center">
+                <h2 style="color:white">List of Features</h2>
+            </div>
+            <br>
+                <div class="d-flex justify-content-center">
+                    <a th:href="@{/store}" class="mx-2 btn btn-outline-dark btn-warning" style="color:white">Store</a>
+                    <a th:href="@{/boba}" class="mx-2 btn btn-outline-dark btn-warning" style="color:white">Boba Tea</a>
+                    <a th:href="@{/search}" class="mx-2 btn btn-outline-dark btn-warning" style="color:white">Search</a>
+                    <a th:href="@{/filter/manager}" class="mx-2 btn btn-outline-dark btn-warning" style="color:white">Filter</a>
+                </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>BOBAXIXIXI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body style="background-color:#2B71FF;">
+<nav th:replace="fragments/fragment :: navbar('Store')"></nav>
+
+<div class="container rounded" style="margin-top: 40px; background-color:white; padding-top:30px;padding-bottom:75px">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 class="font-weight-bold; text-center">Store Detail</h2>
+                <br>
+                <p th:text="'Store Name  : ' + ${store.namaToko}"></p>
+                <p th:text="'Address  : ' + ${store.alamatToko}"></p>
+                <p th:text="'Open Hour  : ' + ${store.waktuBuka}"></p>
+                <p th:text="'Close Hour  : ' + ${store.waktuTutup}"></p>
+                <p th:text="'Manager  : ' + ${store.manager.namaManager}"></p>
+                <p th:text="'Store Code  : ' + ${store.noTeleponToko}"></p>
+
+                <br>
+
+                <table class="table table-hover" >
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Topping</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="Bobatea, iterationStatus : *{listStoreBobatea}">
+                        <td th:text="${Bobatea.idBobatea}"></td>
+                        <td th:text="${Bobatea.namaVarian}"></td>
+                        <td th:text="${Bobatea.Topping.namaTopping}"></td>
+                        <td th:text="'Rp. ' + ${Bobatea.hargaBobatea}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-warning" th:href="@{/store/{idToko}/assign-boba(idToko=${store.idToko})}">+ Add Boba to Store</a>
+</div>
+
+</body>
+
+</html>
